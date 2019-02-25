@@ -7,10 +7,12 @@ public class PlayerController : MonoBehaviour
 
     public float speed;
 
+    private SpriteRenderer sprite;
     private Rigidbody rb;
 
     void Start()
     {
+        sprite = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody>();
     }
 
@@ -34,14 +36,14 @@ public class PlayerController : MonoBehaviour
     {
         if (rb.velocity.magnitude > 0.5)
         {
-            transform.rotation = Quaternion.LookRotation(rb.velocity) * Quaternion.Euler(0, 0, Mathf.Sin(Time.time * 10) * 40);
-            transform.position = new Vector3(transform.position.x, 1 + Mathf.PingPong(Time.time * 2, 0.6f), transform.position.z);
+            sprite.transform.rotation = Quaternion.LookRotation(rb.velocity) * Quaternion.Euler(0, 0, Mathf.Sin(Time.time * 10) * 40);
+            sprite.transform.position = new Vector3(transform.position.x, 1 + Mathf.PingPong(Time.time * 2, 0.6f), transform.position.z);
         }
         else
         {
             // Lerp back to standing straight up
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y, 0), Time.deltaTime * 10);
-            transform.position = new Vector3(transform.position.x, 1, transform.position.z);
+            sprite.transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y, 0), Time.deltaTime * 10);
+            sprite.transform.position = new Vector3(transform.position.x, 1, transform.position.z);
         }
     }
 }
