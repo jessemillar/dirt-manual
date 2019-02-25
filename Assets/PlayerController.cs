@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour
         rb.AddForce(movement * speed);
     }
 
+    // TODO Make the object walk by rotating and taking "steps"
     void Walk()
     {
         if (rb.velocity.magnitude > 0.5)
