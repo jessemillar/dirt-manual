@@ -5,7 +5,9 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 
-    public float speed;
+    public float speed = 3;
+    public float rotation = 30;
+    public float stepHeight = 0.1f;
 
     private SpriteRenderer sprite;
     private Rigidbody rb;
@@ -31,19 +33,18 @@ public class PlayerController : MonoBehaviour
         rb.AddForce(movement * speed);
     }
 
-    // TODO Make the object walk by rotating and taking "steps"
     void Walk()
     {
         if (rb.velocity.magnitude > 0.5)
         {
-            sprite.transform.rotation = Quaternion.LookRotation(rb.velocity) * Quaternion.Euler(0, 0, Mathf.Sin(Time.time * 10) * 40);
-            sprite.transform.position = new Vector3(transform.position.x, 1 + Mathf.PingPong(Time.time * 2, 0.6f), transform.position.z);
+            sprite.transform.rotation = Quaternion.LookRotation(rb.velocity) * Quaternion.Euler(0, Mathf.Sin(Time.time * 10) * rotation * 1.5f, Mathf.Sin(Time.time * 10) * rotation);
+            sprite.transform.position = Vector3.Slerp(transform.position, new Vector3(transform.position.x, stepHeight, transform.position.z), Time.deltaTime * 10);
         }
         else
         {
             // Lerp back to standing straight up
             sprite.transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y, 0), Time.deltaTime * 10);
-            sprite.transform.position = new Vector3(transform.position.x, 1, transform.position.z);
+            sprite.transform.position = Vector3.Slerp(transform.position, new Vector3(transform.position.x, 0, transform.position.z), Time.deltaTime * 10);
         }
     }
 }
