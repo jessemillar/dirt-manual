@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour
     {
         if (rb.velocity.magnitude > 0.5)
         {
-            sprite.transform.rotation = Quaternion.LookRotation(rb.velocity) * Quaternion.Euler(0, Mathf.Sin(Time.time * 10) * rotation * 1.5f, Mathf.Sin(Time.time * 10) * rotation);
+            sprite.transform.rotation = Quaternion.LookRotation(rb.velocity) * Quaternion.Euler(0, 0, 1) * Quaternion.Euler(0, Mathf.Sin(Time.time * 10) * rotation * 1.5f, Mathf.Sin(Time.time * 10) * rotation);
             sprite.transform.position = Vector3.Slerp(transform.position, new Vector3(transform.position.x, stepHeight, transform.position.z), Time.deltaTime * 10);
         }
         else

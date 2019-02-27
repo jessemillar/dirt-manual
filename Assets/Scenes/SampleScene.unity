@@ -230,7 +230,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 3
   rotation: 30
-  stepHeight: 0.25
+  stepHeight: 0.1
 --- !u!212 &379609473
 SpriteRenderer:
   m_ObjectHideFlags: 0

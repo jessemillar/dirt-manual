@@ -12,7 +12,7 @@
 		}
 		LOD 200
 
-		Cull Off
+		Cull Back
 
 		CGPROGRAM
 		// Lambert lighting model, and enable shadows on all light types
